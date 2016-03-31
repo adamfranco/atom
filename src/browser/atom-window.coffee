@@ -169,6 +169,9 @@ class AtomWindow
     else
       @browserWindow.once 'window:loaded', => @openLocations(locationsToOpen)
 
+  replaceEnvironment: (env) ->
+    @browserWindow.webContents.send 'environment', env
+
   sendMessage: (message, detail) ->
     @browserWindow.webContents.send 'message', message, detail
 

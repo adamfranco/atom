@@ -35,3 +35,7 @@ module.exports = ({blobStore}) ->
       window.removeEventListener('focus', windowFocused)
       setTimeout (-> document.querySelector('atom-workspace').focus()), 0
     window.addEventListener('focus', windowFocused)
+    {ipcRenderer} = require 'electron'
+    ipcRenderer.on('environment', (event, env) ->
+      environmentHelpers.replace(env)
+    )
