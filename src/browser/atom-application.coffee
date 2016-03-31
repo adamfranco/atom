@@ -510,7 +510,7 @@ class AtomApplication
     for window in @windows
       unless window.isSpec
         if loadSettings = window.getLoadSettings()
-          states.push(initialPaths: loadSettings.initialPaths)
+          states.push({initialPaths: loadSettings.initialPaths, env: process.env})
     if states.length > 0 or allowEmpty
       @storageFolder.storeSync('application.json', states)
 
@@ -524,6 +524,7 @@ class AtomApplication
           urlsToOpen: []
           devMode: @devMode
           safeMode: @safeMode
+          env: state.env
         }))
       true
     else
