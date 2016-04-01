@@ -68,6 +68,7 @@ class AtomWindow
       @loaded = true
 
     @setLoadSettings(loadSettings)
+    @env = loadSettings.env if loadSettings.env?
     @browserWindow.focusOnWebView() if @isSpec
     @browserWindow.temporaryState = {windowDimensions} if windowDimensions?
 
@@ -85,6 +86,13 @@ class AtomWindow
     if @browserWindow.webContents? and not @browserWindow.webContents.isLoading()
       hash = url.parse(@browserWindow.webContents.getURL()).hash.substr(1)
       JSON.parse(decodeURIComponent(hash))
+
+  setEnvironment: (@env) =>
+
+  getEnvironment: =>
+    return @env if @env?.PATH?
+    return @browserWindow.loadSettings.env if @browserWindow?.loadSettings?.env?.PATH?
+    return
 
   hasProjectPath: -> @getLoadSettings().initialPaths?.length > 0
 

@@ -9,6 +9,7 @@ module.exports = ({blobStore}) ->
 
   # Set baseline environment
   environmentHelpers.normalize({env: env})
+  env = process.env
 
   # Add application-specific exports to module search path.
   exportsPath = path.join(resourcePath, 'exports')
